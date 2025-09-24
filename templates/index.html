@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uncloud - 3D Neural Mental Health Platform</title>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>-->
+<!--    <script src="/static/JS/main.js" defer></script>-->
+<!--    <link rel="stylesheet" href="/static/CSS/style.css">-->
+    <link rel="stylesheet" href=" {{ url_for('static', filename='/CSS/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Initializing Quantum Neural Interface...</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- 3D Canvas -->
+    <canvas class="three-canvas" id="threeCanvas"></canvas>
+
+    <!-- Header -->
+    <header class="header-3d">
+        <div class="logo-3d" onclick="scrollToSection(0)">
+            <div class="logo-symbol-3d">☁️</div>
+            <div class="logo-text-3d">UNCLOUD</div>
+        </div>
+        <div class="header-stats">
+            <div class="stat-orb-mini active"></div>
+            <span>Neural Link Active</span>
+            <div class="stat-orb-mini secure"></div>
+            <span>Session: #UC4857</span>
+            <div class="stat-orb-mini quantum"></div>
+            <span>Quantum Encrypted</span>
+        </div>
+    </header>
+
+    <!-- 3D Navigation -->
+    <nav class="nav-3d">
+        <div class="nav-sphere" data-section="0" title="Home" onclick="scrollToSection(0)">🏠</div>
+        <div class="nav-sphere chatbot" data-section="1" title="AI Therapy" onclick="openModal('ai-modal')">🤖</div>
+        <div class="nav-sphere" data-section="2" title="Biometrics" onclick="openBiometrics()">💓</div>
+        <div class="nav-sphere" data-section="3" title="Resources" onclick="scrollToSection(2)">📚</div>
+        <div class="nav-sphere" data-section="4" title="Community" onclick="scrollToSection(3)">👥</div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="section-3d section-hero visible" id="section-0">
+            <h1 class="hero-title">NEURAL MIND HEALING</h1>
+            <p class="hero-subtitle">Revolutionary 3D Mental Health Platform</p>
+
+            <div class="cards-container">
+                <div class="holo-card" onclick="openModal('ai-modal')">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">🧠 Quantum AI Therapist</h3>
+                    <p>Advanced neural network analyzes your mental patterns in real-time using quantum algorithms</p>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;">
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Success Rate: 94.7% | Active Sessions: 1,247</div>
+                    </div>
+                </div>
+
+                <div class="holo-card" onclick="openBiometrics()">
+                    <h3 style="color: #a8edea; margin-bottom: 1rem;">💓 Biometric Integration</h3>
+                    <p>Live heart rate, stress levels, and emotional state monitoring through advanced sensors</p>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(168, 237, 234, 0.1); border-radius: 15px;">
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Accuracy: 98.2% | Real-time Processing</div>
+                    </div>
+                </div>
+
+                <div class="holo-card" onclick="openModal('privacy-modal')">
+                    <h3 style="color: #764ba2; margin-bottom: 1rem;">🔒 Complete Anonymity</h3>
+                    <p>Zero personal data stored. Quantum-encrypted sessions with military-grade security</p>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(118, 75, 162, 0.1); border-radius: 15px;">
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Encryption: AES-256 | Anonymous Sessions: ∞</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Section -->
+        <section class="section-3d" id="section-1">
+            <!-- <h2 style="font-size: 4rem; text-align: center; margin-bottom: 2rem; background: linear-gradient(45deg, #667eea, #764ba2); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Quantum AI Consciousness</h2> -->
+             <h2 style="text-align: center; margin-bottom: 2rem; background: linear-gradient(45deg, #667eea, #764ba2); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Quantum AI Consciousness</h2>
+
+            <div class="cards-container">
+                <div class="holo-card">
+                    <h3 style="color: #667eea;">🎯 Neural Pattern Recognition</h3>
+                    <p>AI analyzes micro-expressions, voice patterns, and typing rhythms to detect mental state changes before you're even aware of them.</p>
+                    <div style="margin-top: 1rem; display: flex; justify-content: space-between; font-size: 0.9rem; opacity: 0.8;">
+                        <span>Patterns Analyzed: 847,293</span>
+                        <span>Accuracy: 96.4%</span>
+                    </div>
+                </div>
+
+                <div class="holo-card">
+                    <h3 style="color: #a8edea;">🧬 Quantum Entanglement Therapy</h3>
+                    <p>Revolutionary approach using quantum consciousness principles to create neural pathway healing at the subatomic level.</p>
+                    <div style="margin-top: 1rem; display: flex; justify-content: space-between; font-size: 0.9rem; opacity: 0.8;">
+                        <span>Sessions: 12,847</span>
+                        <span>Recovery Rate: 91.2%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section class="section-3d" id="section-2">
+            <h2 style="font-size: 4rem; text-align: center; margin-bottom: 2rem; background: linear-gradient(45deg, #a8edea, #fed6e3); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Quantum Healing Resources</h2>
+
+            <div class="cards-container">
+                <div class="holo-card" onclick="openModal('frequency-modal')">
+                    <h3 style="color: #667eea;">🎵 528Hz DNA Repair Frequency</h3>
+                    <p>Scientifically proven healing frequency that repairs DNA damage and promotes cellular regeneration while reducing cortisol levels by 23%.</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; opacity: 0.8;">
+                            <span>Duration: 20 min</span>
+                            <span>Effectiveness: 96%</span>
+                            <span>Users: 45,829</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="holo-card" onclick="openModal('neural-modal')">
+                    <h3 style="color: #a8edea;">🧬 Neural Rewiring Protocols</h3>
+                    <p>Advanced neuroplasticity exercises combined with binaural beats to restructure negative thought patterns and create new neural pathways.</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(168, 237, 234, 0.1); border-radius: 10px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; opacity: 0.8;">
+                            <span>Sessions: 12</span>
+                            <span>Success: 89%</span>
+                            <span>Time: 6 weeks</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="holo-card" onclick="openModal('consciousness-modal')">
+                    <h3 style="color: #764ba2;">✨ Quantum Consciousness Expansion</h3>
+                    <p>Breakthrough meditation techniques that access higher dimensions of consciousness for profound healing and reality shifting.</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(118, 75, 162, 0.1); border-radius: 10px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; opacity: 0.8;">
+                            <span>Level: Advanced</span>
+                            <span>Participants: 1,247</span>
+                            <span>Breakthroughs: 78%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="section-3d" id="section-3">
+            <h2 style="font-size: 4rem; text-align: center; margin-bottom: 2rem; background: linear-gradient(45deg, #764ba2, #667eea); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Anonymous Healing Community</h2>
+
+            <div style="display: grid; gap: 2rem; max-width: 1000px;">
+                <div class="holo-card" onclick="openModal('stories-modal')">
+                    <h3 style="color: #48bb78;">🌟 Quantum Healing Success Stories</h3>
+                    <div style="background: rgba(72, 187, 120, 0.1); padding: 1.5rem; border-radius: 15px; margin-top: 1rem;">
+                        <p style="font-style: italic; opacity: 0.9; margin-bottom: 1rem;">"The quantum AI detected my depression 3 weeks before I realized it. The 528Hz therapy literally saved my life during finals."</p>
+                        <div style="text-align: right; font-size: 0.8rem; color: #48bb78;">- Anonymous Student #UC2847</div>
+                        <div style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">Recovery Time: 4 weeks | Quantum Sessions: 12</div>
+                    </div>
+                </div>
+
+                <div class="holo-card" onclick="openModal('groups-modal')">
+                    <h3 style="color: #667eea;">👥 Live Quantum Support Groups</h3>
+                    <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 12px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(102, 126, 234, 0.2)'" onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'">
+                            <strong>🎯 Exam Anxiety Quantum Healing</strong>
+                            <div style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.5rem;">47 souls online • Success rate: 94%</div>
+                        </div>
+                        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 12px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(102, 126, 234, 0.2)'" onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'">
+                            <strong>🌊 Depression Wave Transformation</strong>
+                            <div style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.5rem;">23 warriors online • Recovery: 6 weeks avg</div>
+                        </div>
+                        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 12px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(102, 126, 234, 0.2)'" onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'">
+                            <strong>💫 Social Anxiety Quantum Circle</strong>
+                            <div style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.5rem;">31 beings online • Confidence boost: 89%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- AI Chat Interface -->
+    <div class="ai-interface-3d">
+        <div class="ai-avatar-3d" onclick="addAIMessage()" title="Click me for wisdom!">🤖</div>
+        <button class="ai-close" onclick="aiClose()">×</button>
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <strong style="color: #667eea;">Quantum AI Consciousness</strong>
+            <div style="font-size: 0.8rem; opacity: 0.7;">Neural patterns analyzed: 1,247,892 | Active healing sessions: 847</div>
+        </div>
+        <div class="ai-messages-3d" id="aiMessages">
+            <div class="message-3d">I sense elevated stress patterns in your neural field. Your quantum signature shows 73% harmony. Shall I activate your personalized healing frequency?</div>
+            <div class="message-3d">Your consciousness resonates at 528Hz - the frequency of love and DNA repair. I detect 23% improvement since our last quantum entanglement.</div>
+        </div>
+        <input class="quantum-input" id="userInput" placeholder="Communicate with the quantum consciousness..." onkeypress="handleUserInput(event)" />
+    </div>
+
+    <!-- Biometric Dashboard -->
+    <div class="biometric-3d" id="biometricDash">
+        <button class="modal-close" onclick="closeBiometrics()">×</button>
+        <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">Live Quantum Biometric Scan</h2>
+        <div class="metrics-grid">
+            <div class="metric-orb" onclick="showMetricDetail('harmony')">
+                <div class="metric-value" style="color: #48bb78;" id="harmonyValue">94%</div>
+                <div class="metric-label">Neural Harmony</div>
+            </div>
+            <div class="metric-orb" onclick="showMetricDetail('heart')">
+                <div class="metric-value" style="color: #667eea;" id="heartValue">72</div>
+                <div class="metric-label">Heart Frequency</div>
+            </div>
+            <div class="metric-orb" onclick="showMetricDetail('stress')">
+                <div class="metric-value" style="color: #a8edea;" id="stressValue">Low</div>
+                <div class="metric-label">Quantum Stress</div>
+            </div>
+            <div class="metric-orb" onclick="showMetricDetail('focus')">
+                <div class="metric-value" style="color: #764ba2;" id="focusValue">87%</div>
+                <div class="metric-label">Focus Coherence</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;">
+            <strong>Quantum Field Status: </strong><span style="color: #48bb78;">Optimal Healing State Detected</span>
+            <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Recommended: Continue with 528Hz therapy session</div>
+        </div>
+    </div>
+
+    <!-- Modal System -->
+    <div class="modal-3d" id="ai-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('ai-modal')">×</button>
+            <h2 style="color: #667eea; margin-bottom: 1rem;">🤖 Quantum AI Consciousness</h2>
+            <p>Our revolutionary AI doesn't just analyze your words - it reads your quantum field, biometric signatures, and neural oscillations to provide healing that transcends conventional therapy.</p>
+            <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;">
+                <h3 style="color: #a8edea;">Advanced Capabilities:</h3>
+                <ul style="margin-top: 1rem; line-height: 1.8;">
+                    <li>🧬 Quantum consciousness interfacing</li>
+                    <li>💡 Predictive mental health analysis</li>
+                    <li>🎵 Personalized healing frequency generation</li>
+                    <li>🌊 Subconscious pattern restructuring</li>
+                    <li>✨ Multi-dimensional healing protocols</li>
+                </ul>
+            </div>
+            <button style="width: 100%; padding: 1rem; background: linear-gradient(45deg, #667eea, #764ba2); border: none; border-radius: 15px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;" onclick="startAISession()">Begin Quantum Healing Session</button>
+        </div>
+    </div>
+
+    <div class="modal-3d" id="frequency-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('frequency-modal')">×</button>
+            <h2 style="color: #667eea; margin-bottom: 1rem;">🎵 528Hz DNA Repair Frequency</h2>
+            <p>The "Love Frequency" - scientifically proven to repair DNA, reduce cortisol, and promote cellular regeneration.</p>
+            <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 15px;">
+                <h3 style="color: #a8edea;">Scientific Benefits:</h3>
+                <ul style="margin-top: 1rem; line-height: 1.8;">
+                    <li>🧬 DNA repair and cellular regeneration</li>
+                    <li>💚 23% reduction in cortisol levels</li>
+                    <li>🧘 Enhanced meditation and focus</li>
+                    <li>💤 Improved sleep quality</li>
+                    <li>✨ Increased life energy and vitality</li>
+                </ul>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <button style="padding: 1rem; background: linear-gradient(45deg, #667eea, #764ba2); border: none; border-radius: 15px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;" onclick="playHealing('528hz')">🎵 Play 528Hz</button>
+                <button style="padding: 1rem; background: rgba(102, 126, 234, 0.2); border: 2px solid #667eea; border-radius: 15px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;" onclick="downloadFrequency('528hz')">📥 Download</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add more modals for other content -->
+    <div class="modal-3d" id="privacy-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('privacy-modal')">×</button>
+            <h2 style="color: #764ba2; margin-bottom: 1rem;">🔒 Quantum Privacy Protection</h2>
+            <p>Your privacy is protected by quantum encryption that makes your data theoretically impossible to hack.</p>
+            <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(118, 75, 162, 0.1); border-radius: 15px;">
+                <h3 style="color: #a8edea;">Security Features:</h3>
+                <ul style="margin-top: 1rem; line-height: 1.8;">
+                    <li>🔐 AES-256 Quantum Encryption</li>
+                    <li>🚫 Zero Personal Data Storage</li>
+                    <li>👤 Anonymous Session IDs</li>
+                    <li>🌐 Decentralized Architecture</li>
+                    <li>🛡️ Military-Grade Protection</li>
+                </ul>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: rgba(72, 187, 120, 0.1); border-radius: 10px; color: #48bb78;">
+                <strong>✅ Your anonymity is mathematically guaranteed</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress" style="height: 0%;"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-3d">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">Quantum Platform</h3>
+                <ul class="footer-links">
+                    <li onclick="openModal('ai-modal')">🧠 Neural AI Consciousness</li>
+                    <li onclick="openBiometrics()">💓 Biometric Quantum Scan</li>
+                    <li onclick="openModal('privacy-modal')">🔒 Quantum Encryption</li>
+                    <li onclick="openModal('consciousness-modal')">✨ Consciousness Expansion</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3 class="footer-title">Healing Network</h3>
+                <ul class="footer-links">
+                    <li onclick="showEmergencyHelp()">📞 24/7 Quantum Crisis Portal</li>
+                    <li onclick="openModal('groups-modal')">👥 Anonymous Soul Groups</li>
+                    <li onclick="showGoalTracker()">🎯 Quantum Goal Alignment</li>
+                    <li onclick="showAnalytics()">📈 Consciousness Analytics</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3 class="footer-title">Healing Resources</h3>
+                <ul class="footer-links">
+                    <li onclick="openModal('frequency-modal')">🎵 DNA Repair Frequencies</li>
+                    <li onclick="openModal('neural-modal')">🧬 Neural Rewiring Protocols</li>
+                    <li onclick="showMindfulness()">🌟 Quantum Mindfulness</li>
+                    <li onclick="openModal('consciousness-modal')">💫 Reality Shifting Techniques</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3 class="footer-title">Security & Ethics</h3>
+                <ul class="footer-links">
+                    <li onclick="showDataPolicy()">🔐 Zero Data Collection</li>
+                    <li onclick="openModal('privacy-modal')">🛡️ Quantum Encryption</li>
+                    <li onclick="showAnonymity()">👤 Complete Anonymity</li>
+                    <li onclick="showEthics()">🌐 Ethical AI Principles</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="status-indicators">
+                <div class="status-item">
+                    <div class="status-dot green"></div>
+                    <span>2,847 Active Neural Sessions</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot blue"></div>
+                    <span>99.9% Quantum Uptime</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot cyan"></div>
+                    <span>Consciousness Secure</span>
+                </div>
+            </div>
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;">&copy; 2025 Uncloud Neural Platform. Revolutionizing Mental Health Through Quantum Technology.</p>
+            <p style="font-size: 0.9rem; opacity: 0.7;">Built for Smart India Hackathon 2025 | Anonymous • Secure • Revolutionary | Changing Reality One Mind at a Time</p>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='/JS/main.js') }}" defer></script>
+</body>
+</html>
